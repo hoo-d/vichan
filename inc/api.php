@@ -208,4 +208,24 @@ class Api {
 
 		return $apiCatalog;
 	}
+	
+	public function translateBoard(Board $board) {
+		$apiBoard = [];
+		
+		foreach ($boards as $board) {
+			$apiBoard['uri'] = $board['uri'];
+			$apiBoard['title'] = $board['title'];
+			$apiBoard['subtitle'] = $board['subtitle'];
+		}
+
+		return $apiBoard;
+	}
+
+	public function translateBoards($boards) {
+		$apiBoards = [];
+		foreach ($boards as $board) {
+			$apiBoards[] = $this->translateBoard($board);
+		}
+		return $apiBoards;
+	}
 }
