@@ -57,6 +57,9 @@ function mod_login(Context $ctx, $redirect = false) {
 		// Check if inputs are set and not empty
 		if (!isset($_POST['username'], $_POST['password']) || $_POST['username'] == '' || $_POST['password'] == '') {
 			$args['error'] = $config['error']['invalid'];
+		}
+		elseif (strlen($_POST['password']) > 128 || strlen($_POST['username']) > 128) {
+            $args['error'] = $config['error']['infotoolong'];
 		} elseif (!login($_POST['username'], $_POST['password'])) {
 			if ($config['syslog'])
 				_syslog(LOG_WARNING, 'Unauthorized login attempt!');
